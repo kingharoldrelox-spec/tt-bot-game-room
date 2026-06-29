@@ -1,8 +1,19 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 const { joinVoiceChannel } = require('@discordjs/voice');
+const express = require('express');
 
+const app = express();
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates]
+});
+
+// Ito ang nagpapanatiling buhay sa bot nang libre
+app.get('/', (req, res) => {
+    res.send('T^T BOT GAME ROOM ay Buhay na Buhay 24/7!');
+});
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log('Web server ay handa na.');
 });
 
 client.once('ready', () => {
@@ -24,8 +35,6 @@ client.once('ready', () => {
         } catch (error) {
             console.error("Hindi makasali sa voice channel:", error);
         }
-    } else {
-        console.error("Hindi mahanap ang Guild/Server ID.");
     }
 });
 
